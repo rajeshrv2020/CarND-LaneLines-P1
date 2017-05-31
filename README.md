@@ -1,53 +1,168 @@
-#**Finding Lane Lines on the Road** 
-[![Udacity - Self-Driving Car NanoDegree](https://s3.amazonaws.com/udacity-sdc/github/shield-carnd.svg)](http://www.udacity.com/drive)
-
-<img src="examples/laneLines_thirdPass.jpg" width="480" alt="Combined Image" />
-
-Overview
----
-
-When we drive, we use our eyes to decide where to go.  The lines on the road that show us where the lanes are act as our constant reference for where to steer the vehicle.  Naturally, one of the first things we would like to do in developing a self-driving car is to automatically detect lane lines using an algorithm.
-
-In this project you will detect lane lines in images using Python and OpenCV.  OpenCV means "Open-Source Computer Vision", which is a package that has many useful tools for analyzing images.  
-
-To complete the project, two files will be submitted: a file containing project code and a file containing a brief write up explaining your solution. We have included template files to be used both for the [code](https://github.com/udacity/CarND-LaneLines-P1/blob/master/P1.ipynb) and the [writeup](https://github.com/udacity/CarND-LaneLines-P1/blob/master/writeup_template.md).The code file is called P1.ipynb and the writeup template is writeup_template.md 
-
-To meet specifications in the project, take a look at the requirements in the [project rubric](https://review.udacity.com/#!/rubrics/322/view)
+### Project 1 : Finding Lane Lines on the Road** 
 
 
-Creating a Great Writeup
----
-For this project, a great writeup should provide a detailed response to the "Reflection" section of the [project rubric](https://review.udacity.com/#!/rubrics/322/view). There are three parts to the reflection:
+**Introduction**
 
-1. Describe the pipeline
-
-2. Identify any shortcomings
-
-3. Suggest possible improvements
-
-We encourage using images in your writeup to demonstrate how your pipeline works.  
-
-All that said, please be concise!  We're not looking for you to write a book here: just a brief description.
-
-You're not required to use markdown for your writeup.  If you use another method please just submit a pdf of your writeup. Here is a link to a [writeup template file](https://github.com/udacity/CarND-LaneLines-P1/blob/master/writeup_template.md). 
+This project introduces few concepts like
+  * Canny Edge detection
+  * Masking unwanted info from the scene and foucssing only on the region of interest
+  * Extrapolate the lanes with the few points
 
 
-The Project
----
+** Description **
 
-## If you have already installed the [CarND Term1 Starter Kit](https://github.com/udacity/CarND-Term1-Starter-Kit/blob/master/README.md) you should be good to go!   If not, you should install the starter kit to get started on this project. ##
+My pipeline consists of 7 steps.
 
-**Step 1:** Set up the [CarND Term1 Starter Kit](https://classroom.udacity.com/nanodegrees/nd013/parts/fbf77062-5703-404e-b60c-95b78b2f3f9e/modules/83ec35ee-1e02-48a5-bdb7-d244bd47c2dc/lessons/8c82408b-a217-4d09-b81d-1bda4c6380ef/concepts/4f1870e0-3849-43e4-b670-12e6f2d4b7a7) if you haven't already.
+  1. Convert the image into the grayscale
+  2. Perform smoothening of image using gaussian blur
+  3. Do the Canny edge detection to detect the change in the intensity of the image.
+  4. Filter out the canny edge points using a polyfit to focus on region of interest
+  5. Perform Hough transform to find the lanes
+  6. Draw the coloured lines on the detected lanes and extropolate the lines by fitting a line using the min and max value of the lane point
+  7. Superimpose the coloured lines on the original image
 
-**Step 2:** Open the code in a Jupyter Notebook
 
-You will complete the project code in a Jupyter notebook.  If you are unfamiliar with Jupyter Notebooks, check out <A HREF="https://www.packtpub.com/books/content/basics-jupyter-notebook-and-python" target="_blank">Cyrille Rossant's Basics of Jupyter Notebook and Python</A> to get started.
+### Program
+I'm yet to get use to juypter notebook. So, the project is completed outside the juypter notebook. 
 
-Jupyter is an Ipython notebook where you can run blocks of code and see results interactively.  All the code for this project is contained in a Jupyter notebook. To start Jupyter in your browser, use terminal to navigate to your project directory and then run the following command at the terminal prompt (be sure you've activated your Python 3 carnd-term1 environment as described in the [CarND Term1 Starter Kit](https://github.com/udacity/CarND-Term1-Starter-Kit/blob/master/README.md) installation instructions!):
+  To run the program , do the following.
 
-`> jupyter notebook`
+  > python lane_detect.py
 
-A browser window will appear showing the contents of the current directory.  Click on the file called "P1.ipynb".  Another browser window will appear displaying the notebook.  Follow the instructions in the notebook to complete the project.  
+   The test image are written into test_images_output directory and the videos are saved into test_videos_output directory
 
-**Step 3:** Complete the project and submit both the Ipython notebook and the project writeup
+
+[//]: # (Image References)
+
+[solidWhiteCurve_original_image]: ./test_images/solidWhiteCurve.jpg "Original"
+[solidWhiteCurve_Extrapolated_image]: ./test_images_output/solidWhiteCurve.png "Extrapolated"
+[solidWhiteCurve_no_Extrapolated_image]: ./test_images_output/solidWhiteCurve_no_extrapolate.png "NonExtrapolated"
+
+[solidWhiteRight_original_image]: ./test_images/solidWhiteRight.jpg "Original"
+[solidWhiteRight_Extrapolated_image]: ./test_images_output/solidWhiteRight.png "Extrapolated"
+[solidWhiteRight_no_Extrapolated_image]: ./test_images_output/solidWhiteRight_no_extrapolate.png "NonExtrapolated"
+
+[solidYellowCurve2_original_image]: ./test_images/solidYellowCurve2.jpg "Original"
+[solidYellowCurve2_Extrapolated_image]: ./test_images_output/solidYellowCurve2.png "Extrapolated"
+[solidYellowCurve2_no_Extrapolated_image]: ./test_images_output/solidYellowCurve2_no_extrapolate.png "NonExtrapolated"
+
+[solidYellowCurve_original_image]: ./test_images/solidYellowCurve.jpg "Original"
+[solidYellowCurve_Extrapolated_image]: ./test_images_output/solidYellowCurve.png "Extrapolated"
+[solidYellowCurve_no_Extrapolated_image]: ./test_images_output/solidYellowCurve_no_extrapolate.png "NonExtrapolated"
+
+[solidYellowLeft_original_image]: ./test_images/solidYellowLeft.jpg "Original"
+[solidYellowLeft_Extrapolated_image]: ./test_images_output/solidYellowLeft.png "Extrapolated"
+[solidYellowLeft_no_Extrapolated_image]: ./test_images_output/solidYellowLeft_no_extrapolate.png "NonExtrapolated"
+
+[whiteCarLaneSwitch_original_image]: ./test_images/whiteCarLaneSwitch.jpg "Original"
+[whiteCarLaneSwitch_Extrapolated_image]: ./test_images_output/whiteCarLaneSwitch.png "Extrapolated"
+[whiteCarLaneSwitch_no_Extrapolated_image]: ./test_images_output/whiteCarLaneSwitch_no_extrapolate.png "NonExtrapolated"
+
+
+## 1.solidYellowLeft 
+
+** Original **
+
+![alt text][solidYellowLeft_original_image]
+
+** Non Extrapolated ** 
+
+![alt text][solidYellowLeft_no_Extrapolated_image]
+
+** Extrapolated **
+
+![alt text][solidYellowLeft_Extrapolated_image]
+
+
+## 2.solidWhiteRight 
+
+
+** Original **
+
+![alt text][solidWhiteRight_original_image]
+
+** Non Extrapolated ** 
+
+![alt text][solidWhiteRight_no_Extrapolated_image]
+
+** Extrapolated **
+
+![alt text][solidWhiteRight_Extrapolated_image]
+
+## 3.solidWhiteCurve
+
+
+** Original **
+
+![alt text][solidWhiteCurve_original_image]
+
+** Extrapolated **
+
+![alt text][solidWhiteCurve_no_Extrapolated_image]
+
+** Non Extrapolated ** 
+
+![alt text][solidWhiteCurve_Extrapolated_image]
+
+## 4.whiteCarLaneSwitch
+
+
+** Original **
+
+![alt text][whiteCarLaneSwitch_original_image]
+
+** Non Extrapolated ** 
+
+![alt text][whiteCarLaneSwitch_no_Extrapolated_image]
+
+** Extrapolated **
+
+![alt text][whiteCarLaneSwitch_Extrapolated_image]
+
+
+## 5.solidYellowCurve
+
+** Original **
+
+![alt text][solidYellowCurve_original_image]
+
+** Non Extrapolated ** 
+
+![alt text][solidYellowCurve_no_Extrapolated_image]
+
+** Extrapolated **
+
+![alt text][solidYellowCurve_Extrapolated_image]
+
+## 6.solidYellowCurve2
+
+
+** Original **
+
+![alt text][solidYellowCurve2_original_image]
+
+** Non Extrapolated ** 
+
+![alt text][solidYellowCurve2_no_Extrapolated_image]
+
+** Extrapolated **
+
+![alt text][solidYellowCurve2_Extrapolated_image]
+
+
+### Video Files
+
+The Video files are located in the test_videos_output directory
+
+   1. solidWhiteRight.mp4
+   2. solidYellowLeft.mp4
+
+### Possible Improvements
+
+Right now, we are trying to fit a straight line to the lanes. This may not work well for curved roads. 
+
+See test_videos_output/challenge.mp4. 
+
+Instead of straight line, we should be using a function which can fit to the curved lanes too. 
+
 

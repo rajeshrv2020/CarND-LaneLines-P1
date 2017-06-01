@@ -9,7 +9,7 @@ This project introduces few concepts like
   * Extrapolate the lanes with the few points
 
 
-** Description **
+**Description**
 
 My pipeline consists of 7 steps.
 
@@ -30,6 +30,22 @@ I'm yet to get use to juypter notebook. So, the project is completed outside the
   > python lane_detect.py
 
    The test image are written into test_images_output directory and the videos are saved into test_videos_output directory
+
+
+### Video Files
+
+The Video files are located in the test_videos_output directory
+
+   1. solidWhiteRight.mp4
+   2. solidYellowLeft.mp4
+
+### Possible Improvements
+
+Right now, we are trying to fit a straight line to the lanes. This may not work well for curved roads. 
+
+See test_videos_output/challenge.mp4. 
+
+Instead of straight line, we should be using a function which can fit to the curved lanes too. 
 
 
 [//]: # (Image References)
@@ -61,15 +77,15 @@ I'm yet to get use to juypter notebook. So, the project is completed outside the
 
 ## 1.solidYellowLeft 
 
-** Original **
+**Original**
 
 ![alt text][solidYellowLeft_original_image]
 
-** Non Extrapolated ** 
+**Non Extrapolated** 
 
 ![alt text][solidYellowLeft_no_Extrapolated_image]
 
-** Extrapolated **
+**Extrapolated**
 
 ![alt text][solidYellowLeft_Extrapolated_image]
 
@@ -77,92 +93,76 @@ I'm yet to get use to juypter notebook. So, the project is completed outside the
 ## 2.solidWhiteRight 
 
 
-** Original **
+**Original**
 
 ![alt text][solidWhiteRight_original_image]
 
-** Non Extrapolated ** 
+**Non Extrapolated** 
 
 ![alt text][solidWhiteRight_no_Extrapolated_image]
 
-** Extrapolated **
+**Extrapolated**
 
 ![alt text][solidWhiteRight_Extrapolated_image]
 
 ## 3.solidWhiteCurve
 
 
-** Original **
+**Original**
 
 ![alt text][solidWhiteCurve_original_image]
 
-** Extrapolated **
+**Extrapolated**
 
 ![alt text][solidWhiteCurve_no_Extrapolated_image]
 
-** Non Extrapolated ** 
+**Non Extrapolated** 
 
 ![alt text][solidWhiteCurve_Extrapolated_image]
 
 ## 4.whiteCarLaneSwitch
 
 
-** Original **
+**Original**
 
 ![alt text][whiteCarLaneSwitch_original_image]
 
-** Non Extrapolated ** 
+**Non Extrapolated** 
 
 ![alt text][whiteCarLaneSwitch_no_Extrapolated_image]
 
-** Extrapolated **
+**Extrapolated**
 
 ![alt text][whiteCarLaneSwitch_Extrapolated_image]
 
 
 ## 5.solidYellowCurve
 
-** Original **
+**Original**
 
 ![alt text][solidYellowCurve_original_image]
 
-** Non Extrapolated ** 
+**Non Extrapolated** 
 
 ![alt text][solidYellowCurve_no_Extrapolated_image]
 
-** Extrapolated **
+**Extrapolated**
 
 ![alt text][solidYellowCurve_Extrapolated_image]
 
 ## 6.solidYellowCurve2
 
 
-** Original **
+**Original**
 
 ![alt text][solidYellowCurve2_original_image]
 
-** Non Extrapolated ** 
+**Non Extrapolated** 
 
 ![alt text][solidYellowCurve2_no_Extrapolated_image]
 
-** Extrapolated **
+**Extrapolated**
 
 ![alt text][solidYellowCurve2_Extrapolated_image]
-
-
-### Video Files
-
-The Video files are located in the test_videos_output directory
-
-   1. solidWhiteRight.mp4
-   2. solidYellowLeft.mp4
-
-### Possible Improvements
-
-Right now, we are trying to fit a straight line to the lanes. This may not work well for curved roads. 
-
-See test_videos_output/challenge.mp4. 
-
-Instead of straight line, we should be using a function which can fit to the curved lanes too. 
 
 
